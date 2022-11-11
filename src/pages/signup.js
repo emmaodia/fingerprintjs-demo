@@ -11,20 +11,15 @@ export default function SignUp() {
   const { error, data } = useVisitorData();
 
   if (error) {
-    // perform some logic based on the visitor data
     console.log(error.message);
   }
 
   const handleSubmit = (e) => {
-    // prevent the form from refreshing the whole page
     e.preventDefault();
-    // make a popup alert showing the "submitted" text
+
     console.log(username, password);
-    console.log("here");
-    // alert("Submited");
 
     if (data) {
-      // perform some logic based on the visitor data
       console.log(data.visitorFound, data.visitorId);
       const visitorId = data.visitorId;
 
@@ -85,11 +80,11 @@ export default function SignUp() {
         >
           Submit
         </Button>
-        {/* {signup ? (
+        {signup ? (
           <p className="text-success">SignUp Successful!</p>
         ) : (
           <p className="text-danger">Signup Failed.</p>
-        )} */}
+        )}
       </Form>
     </>
   );

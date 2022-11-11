@@ -1,41 +1,21 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
-import { useVisitorData } from "@fingerprintjs/fingerprintjs-pro-react";
 
 export default function SignUp() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState(false);
-
-  // const { error, data } = useVisitorData();
-
-  // if (error) {
-  //   // perform some logic based on the visitor data
-  //   console.log(error.message);
-  // }
-
-  // if (data) {
-  //   // perform some logic based on the visitor data
-  //   console.log(data.visitorFound, data.visitorId);
-  // } else {
-  //   return null;
-  // }
-
-  const { error, data } = useVisitorData();
-
-  if (error) {
-    // perform some logic based on the visitor data
-    console.log(error.message);
-  }
+  // const [freezeLogin, setFreezeLogin] = useState(false);
+  const [loginError, setLoginError] = useState("");
 
   const handleSubmit = (e) => {
-    // prevent the form from refreshing the whole page
     e.preventDefault();
-    // make a popup alert showing the "submitted" text
-    // alert("Submited");
     console.log(username, password);
     console.log("here");
+
+    const fingerprintError =
+      "We detected multiple log in attempts for this user, but we didn't perform the login action";
 
     axios
       .post("http://localhost:5000/api/login", {
@@ -49,16 +29,14 @@ export default function SignUp() {
       })
       .catch((error) => {
         console.log(error);
+        console.log(error.response.data.error);
+        setLoginError(error.response.data.error);
+        if (error.message === fingerprintError) {
+          // setFreezeLogin(true);
+        }
       });
 
     console.log("here2");
-
-    if (data) {
-      // perform some logic based on the visitor data
-      console.log(data.visitorFound, data.visitorId);
-    } else {
-      return null;
-    }
   };
 
   return (
@@ -89,7 +67,6 @@ export default function SignUp() {
           />
         </Form.Group>
 
-        {/* submit button */}
         <Button
           variant="primary"
           type="submit"
@@ -97,6 +74,8 @@ export default function SignUp() {
         >
           Submit
         </Button>
+
+        {loginError ? <p className="text-success">{loginError}</p> : null}
         {login ? (
           <p className="text-success">You Are Logged in Successfully</p>
         ) : (
