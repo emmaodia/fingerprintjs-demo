@@ -36,7 +36,7 @@ app.get("/api/users", (request, response, next) => {
       response.status(400).json({ error: err.message });
       return;
     }
-    // console.log(rows);
+
     response.json({
       message: "success",
       data: rows,
@@ -136,7 +136,7 @@ app.post("/api/login", async (request, response) => {
           { user_id: user[0].Id, username: user[0].username },
           process.env.JWT_SECRET,
           {
-            expiresIn: "1h", // 60s = 60 seconds - (60m = 60 minutes, 2h = 2 hours, 2d = 2 days)
+            expiresIn: "1h",
           }
         );
         user[0].Token = token;
