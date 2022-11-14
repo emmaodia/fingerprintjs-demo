@@ -20,6 +20,7 @@ export default function SignUp() {
     console.log(username, password);
 
     if (data) {
+      //You can check console during authentication to see the data returned.
       console.log(data.visitorFound, data.visitorId);
       const visitorId = data.visitorId;
 
@@ -40,8 +41,6 @@ export default function SignUp() {
     } else {
       return null;
     }
-
-    console.log("here2");
   };
 
   return (
@@ -50,7 +49,7 @@ export default function SignUp() {
       <Form>
         {/* email */}
         <Form.Group controlId="formUsername">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label>Username</Form.Label>
           <Form.Control
             type="text"
             name="username"
