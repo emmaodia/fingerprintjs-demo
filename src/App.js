@@ -1,7 +1,5 @@
-import { Container, Col, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import { Outlet, Link } from "react-router-dom";
-
-import SignUp from "./pages/signup";
 
 function App() {
   return (
@@ -12,10 +10,6 @@ function App() {
           <Link to="/login">Login</Link>
         </nav>
         <Outlet />
-
-        {/* <Col xs={12} sm={12} md={12} lg={12}>
-          <SignUp />
-        </Col> */}
       </Row>
     </Container>
   );

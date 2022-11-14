@@ -14,7 +14,7 @@ root.render(
   <FpjsProvider
     cacheLocation="memory"
     loadOptions={{
-      apiKey: "4rXds2BdbFwYAdBIhCEy",
+      apiKey: process.env.REACT_FPJS_KEY,
       // region: "eu",
     }}
   >
@@ -23,25 +23,7 @@ root.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route path="signup" element={<SignUp />} />
-            <Route path="login" element={<Login />}>
-              <Route
-                index
-                element={
-                  <main style={{ padding: "1rem" }}>
-                    <p>Select an invoice</p>
-                  </main>
-                }
-              />
-              <Route path=":invoiceId" element={<SignUp />} />
-            </Route>
-            <Route
-              path="*"
-              element={
-                <main style={{ padding: "1rem" }}>
-                  <p>There's nothing here!</p>
-                </main>
-              }
-            />
+            <Route path="login" element={<Login />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
