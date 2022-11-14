@@ -109,7 +109,11 @@ app.post("/api/login", async (request, response) => {
         const filters = {
           limit: 5,
         };
-
+        /**
+         * Open an array to store the timestamps.
+         * Call the TimeChecker method to calculate the difference between the timestamp at index[0] and index[4]
+         * Check to ensure that % login attempts under 5 minutes are rejected.
+         */
         let setTime = [];
         await client
           .getVisitorHistory(user[0].visitorID, filters)
@@ -117,12 +121,9 @@ app.post("/api/login", async (request, response) => {
             visitorHistory.visits.map((result) => {
               setTime.push(result.timestamp);
             });
-
-            console.log(setTime);
           });
-        console.log(setTime[0]);
+
         const result = TimeChecker(setTime[0], setTime[1]);
-        console.log(result);
 
         if (result === true) {
           return response
